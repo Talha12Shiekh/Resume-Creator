@@ -1,9 +1,21 @@
+import Navbar from "../Components/Navbar";
+// import TextsPortion from "../Components/TextsPortion";
+import Home from "../Screens/Home";
+// import TemplatesSection from "../Screens/Templates";
+import { CssBaseline } from "@mui/material";
 import "./App.css";
+import { Route, Routes } from "react-router";
+import Templates from "../Screens/Templates";
 
 function App() {
   return (
     <>
-      <h1>Going to build a Resume Creator using <mark>MERN</mark></h1>
+      <CssBaseline />
+      <Navbar />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="templates" element={<Templates />} />
+      </Routes>
     </>
   );
 }
