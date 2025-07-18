@@ -36,6 +36,7 @@ function Logo() {
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+   const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -107,7 +108,7 @@ function Navbar() {
             </Box>
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button variant="contained">
+            <Button variant="contained" onClick={() => navigate("/signup")}>
               <Typography className="poppins" textTransform="capitalize">
                 Sign up
               </Typography>

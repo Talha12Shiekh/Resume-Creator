@@ -8,3 +8,8 @@
   width:100%;
   height: auto;
 }
+
+input#input-with-icon-textfield {
+  padding: .5em !important;
+  font-family: "Poppins", sans-serif !important;
+}

@@ -6,6 +6,7 @@ import { CssBaseline } from "@mui/material";
 import "./App.css";
 import { Route, Routes } from "react-router";
 import Templates from "../Screens/Templates";
+import SignUp from "../Screens/SignUp";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="templates" element={<Templates />} />
+        <Route path="signup" element={<SignUp />} />
       </Routes>
     </>
   );

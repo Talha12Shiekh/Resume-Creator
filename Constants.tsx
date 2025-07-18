@@ -1,11 +1,17 @@
-import cert1 from "/cert1.webp";
-import cert2 from "/cert2.webp";
-import cert3 from "/cert3.webp";
-import cert4 from "/cert4.webp";
-import cert5 from "/cert5.webp";
-import cert6 from "/cert6.webp";
-import cert7 from "/cert7.webp";
-import cert8 from "/cert8.webp";
+import cert1 from "/cert1.png";
+import cert2 from "/cert2.png";
+import cert3 from "/cert3.png";
+import cert4 from "/cert4.png";
+import emptycert1 from "/empty-cert1.png";
+import emptycert2 from "/empty-cert2.png";
+import emptycert3 from "/empty-cert3.png";
+import emptycert4 from "/empty-cert4.png";
+
+import XIcon from "@mui/icons-material/X";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import RssFeedIcon from "@mui/icons-material/RssFeed";
 
 export const navItems = [
   "Template gallery",
@@ -37,4 +43,19 @@ export const TEXTS_DATA = [
   },
 ];
 
-export const TEMPLATES = [cert1, cert2, cert3, cert4, cert5, cert6, cert7, cert8];
+export const TEMPLATES = [
+  { img: cert1, template: emptycert1, key: 1 },
+  { img: cert2, template: emptycert2, key: 2 },
+  { img: cert3, template: emptycert3, key: 3 },
+  { img: cert4, template: emptycert4, key: 4 },
+];
+
+export const FOOTER_COLOR = "#1b2123";
+
+export const SOCIAL_ICONS = [
+  XIcon,
+  YouTubeIcon,
+  InstagramIcon,
+  FacebookIcon,
+  RssFeedIcon,
+];
