@@ -1,10 +1,26 @@
 import { Grid, Box } from "@mui/material";
+import { TEMPLATES } from "../Constants";
+
+export interface CertificateTemplate {
+  img: string;
+  template: string;
+  key: number;
+  positions: {
+    hpositions: { right: number; left: number; top: number };
+    detpositions: { right: number; left: number; top: number };
+    datepositions: { top: number; left: number };
+    sigpositions: { top: number; right: number };
+  };
+}
 
 interface SingleCertificatePropsTypes {
   index: number;
   img: string;
   activeindex: number;
   setactiveindex: React.Dispatch<React.SetStateAction<number>>;
+  setselectedtemplate: React.Dispatch<
+    React.SetStateAction<CertificateTemplate>
+  >;
 }
 
 const SingleCertificate = ({
@@ -12,6 +28,7 @@ const SingleCertificate = ({
   img,
   activeindex,
   setactiveindex,
+  setselectedtemplate,
 }: SingleCertificatePropsTypes) => {
   return (
     <Grid
@@ -20,11 +37,13 @@ const SingleCertificate = ({
         justifyContent: "center",
         alignItems: "center",
       }}
-      key={index}
       size={{ xs: 6, sm: 6, md: 3 }}
     >
       <Box
-        onClick={() => setactiveindex(index)}
+        onClick={() => {
+          setactiveindex(index);
+          setselectedtemplate(TEMPLATES[index]);
+        }}
         sx={{
           width: 200,
           height: 150,

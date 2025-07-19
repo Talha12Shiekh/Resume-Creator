@@ -44,10 +44,108 @@ export const TEXTS_DATA = [
 ];
 
 export const TEMPLATES = [
-  { img: cert1, template: emptycert1, key: 1 },
-  { img: cert2, template: emptycert2, key: 2 },
-  { img: cert3, template: emptycert3, key: 3 },
-  { img: cert4, template: emptycert4, key: 4 },
+  {
+    img: cert1,
+    template: emptycert1,
+    key: 1,
+
+    positions: {
+      hpositions: {
+        right: 0,
+        left: 0,
+        top: 240,
+      },
+      detpositions: {
+        right: 0,
+        left: 0,
+        top: 310,
+      },
+      datepositions: {
+        top: 370,
+        left: 200,
+      },
+      sigpositions: {
+        top: 370,
+        right: 180,
+      },
+    },
+  },
+  {
+    img: cert2,
+    template: emptycert2,
+    key: 2,
+    positions: {
+      hpositions: {
+        right: 0,
+        left: 0,
+        top: 230,
+      },
+      detpositions: {
+        right: 0,
+        left: 0,
+        top: 300,
+      },
+      datepositions: {
+        top: 380,
+        left: 210,
+      },
+      sigpositions: {
+        top: 380,
+        right: 180,
+      },
+    },
+  },
+  {
+    img: cert3,
+    template: emptycert3,
+    key: 3,
+
+    positions: {
+      hpositions: {
+        right: 0,
+        left: 0,
+        top: 200,
+      },
+      detpositions: {
+        right: 0,
+        left: 0,
+        top: 280,
+      },
+      datepositions: {
+        top: 390,
+        left: 260,
+      },
+      sigpositions: {
+        top: 390,
+        right: 235,
+      },
+    },
+  },
+  {
+    img: cert4,
+    template: emptycert4,
+    key: 4,
+    positions: {
+      hpositions: {
+        right: 0,
+        left: 0,
+        top: 200,
+      },
+      detpositions: {
+        right: 0,
+        left: 0,
+        top: 270,
+      },
+      datepositions: {
+        top: 390,
+        left: 230,
+      },
+      sigpositions: {
+        top: 390,
+        right: 160,
+      },
+    },
+  },
 ];
 
 export const FOOTER_COLOR = "#1b2123";

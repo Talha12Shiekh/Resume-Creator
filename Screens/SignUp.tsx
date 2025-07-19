@@ -85,7 +85,7 @@ export const PasswordInput = ({
   );
 };
 
-const SingleRegisterInput = ({
+export const SingleRegisterInput = ({
   placeholder,
   startadorment,
   ...props
@@ -110,6 +110,44 @@ const SingleRegisterInput = ({
   );
 };
 
+interface BottomTextProps {
+  navigateroute: string;
+  ftext: string;
+  stext: string;
+}
+
+export const BottomText = ({
+  navigateroute,
+  ftext,
+  stext,
+}: BottomTextProps) => {
+  const navigate = useNavigate();
+
+  return (
+    <Box sx={{ textAlign: "center" }}>
+      <Button color="info" onClick={() => navigate(navigateroute)}>
+        <Typography
+          textTransform="capitalize"
+          variant="caption"
+          color="black"
+          className="poppins"
+        >
+          {ftext}
+          <Typography
+            textTransform="capitalize"
+            color="blue"
+            variant="caption"
+            className="poppins"
+          >
+            {" "}
+            {stext}{" "}
+          </Typography>{" "}
+        </Typography>
+      </Button>
+    </Box>
+  );
+};
+
 interface CredentialsType {
   name: string;
   email: string;
@@ -117,7 +155,6 @@ interface CredentialsType {
 }
 
 const SignUp = () => {
-
   const navigate = useNavigate();
 
   const [showpassword, setShowPassword] = useState(false);
@@ -191,27 +228,11 @@ const SignUp = () => {
           </Typography>
         </Button>
 
-        <Box sx={{ textAlign: "center" }}>
-          <Button color="info" onClick={() => navigate("/signin")}>
-            <Typography
-              textTransform="capitalize"
-              variant="caption"
-              color="black"
-              className="poppins"
-            >
-              Already have an account?{" "}
-              <Typography
-                textTransform="capitalize"
-                color="blue"
-                variant="caption"
-                className="poppins"
-              >
-                {" "}
-                Sign in here{" "}
-              </Typography>{" "}
-            </Typography>
-          </Button>
-        </Box>
+        <BottomText
+          navigateroute="/signin"
+          ftext="Already have an account?"
+          stext="Sign in here"
+        />
       </Box>
     </Box>
   );

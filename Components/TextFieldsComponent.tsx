@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import type { TextFieldProps } from "@mui/material";
 import { useState } from "react";
+import { InformationType } from "../Screens/Templates";
 
 interface SingleInputProps extends Omit<TextFieldProps, "ref"> {
   label: string;
@@ -33,22 +34,17 @@ const SingleInputWithLabel = ({ label, ...props }: SingleInputProps) => {
   );
 };
 
-interface InformationType {
-  name: string;
-  date: string;
-  signature: string;
-  details: string;
+interface TextFieldsComponentProps {
+  information: InformationType;
+  setinformation: React.Dispatch<React.SetStateAction<InformationType>>;
+  handleDownloadCertificate:() => void
 }
 
-const TextFieldsComponent = () => {
-  const [information, setinformation] = useState<InformationType>({
-    name: "Mark Mackenzie",
-    date: "12/25/2023",
-    signature: "Dr. Arnold O'Neal",
-    details:
-      "This certificate is awarded to [Name] in recognition of their successful completion of [Degree/Academic Program Name] on [Date]. Your hard work, determination, and commitment to academic excellence have enabled you to achieve this significant milestone, and we are proud to recognize your achievement.",
-  });
-
+const TextFieldsComponent = ({
+  information,
+  setinformation,
+  handleDownloadCertificate
+}: TextFieldsComponentProps) => {
   function handlChangeInformation(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
@@ -60,7 +56,6 @@ const TextFieldsComponent = () => {
 
   const { name, date, signature, details } = information;
 
-  function handleCreateCertificate() {}
 
   return (
     <Box>
@@ -96,7 +91,7 @@ const TextFieldsComponent = () => {
       />
 
       <Button
-        onClick={handleCreateCertificate}
+        onClick={handleDownloadCertificate}
         sx={{ mt: 4 }}
         variant="contained"
       >
