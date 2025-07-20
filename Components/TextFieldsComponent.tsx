@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import type { TextFieldProps } from "@mui/material";
-import { useState } from "react";
 import { InformationType } from "../Screens/Templates";
+import DownloadIcon from "@mui/icons-material/Download";
 
 interface SingleInputProps extends Omit<TextFieldProps, "ref"> {
   label: string;
@@ -37,13 +37,19 @@ const SingleInputWithLabel = ({ label, ...props }: SingleInputProps) => {
 interface TextFieldsComponentProps {
   information: InformationType;
   setinformation: React.Dispatch<React.SetStateAction<InformationType>>;
-  handleDownloadCertificate:() => void
+  handleCreateCertificate: () => void;
+  handleDownloadCertificate: () => void;
+  certloaded: boolean;
+  certurl: string;
 }
 
 const TextFieldsComponent = ({
   information,
   setinformation,
-  handleDownloadCertificate
+  handleCreateCertificate,
+  certloaded,
+  handleDownloadCertificate,
+  certurl,
 }: TextFieldsComponentProps) => {
   function handlChangeInformation(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -55,7 +61,6 @@ const TextFieldsComponent = ({
   }
 
   const { name, date, signature, details } = information;
-
 
   return (
     <Box>
@@ -90,15 +95,32 @@ const TextFieldsComponent = ({
         multiline
       />
 
-      <Button
-        onClick={handleDownloadCertificate}
-        sx={{ mt: 4 }}
-        variant="contained"
-      >
-        <Typography textTransform="capitalize" className="poppins">
-          Create Certificate
-        </Typography>
-      </Button>
+      <Box display={"flex"} sx={{ mt: 4 }} justifyContent={"space-between"}>
+        <Button
+          loading={certloaded}
+          loadingPosition="start"
+          color="primary"
+          onClick={handleCreateCertificate}
+          variant="contained"
+        >
+          <Typography textTransform="capitalize" className="poppins">
+            Create Certificate
+          </Typography>
+        </Button>
+
+        {certurl != "" && (
+          <Button
+            startIcon={<DownloadIcon />}
+            color="primary"
+            onClick={handleDownloadCertificate}
+            variant="contained"
+          >
+            <Typography textTransform="capitalize" className="poppins">
+              Download Certificate
+            </Typography>
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 };

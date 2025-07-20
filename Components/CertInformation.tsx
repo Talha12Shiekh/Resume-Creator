@@ -18,15 +18,18 @@ const CertInformation = ({
   const { name, date, signature, details } = information;
 
   return (
-    <Box  ref={ref}>
-      <Container
+    <Box
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
+      <Box
         sx={{
           position: "relative",
           width: "70%",
           height: 500,
           my: 2,
+          bgcolor: "red",
         }}
-        component="section"
+        ref={ref}
       >
         <img className="frontcert" src={template} alt="Loading..." />
         <Box
@@ -88,7 +91,7 @@ const CertInformation = ({
             {signature}
           </Typography>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };

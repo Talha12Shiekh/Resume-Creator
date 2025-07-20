@@ -44,7 +44,7 @@ const SignIn = () => {
 
       <Box
         sx={{
-          width: 500,
+          maxWidth: 500,
           bgcolor: "white",
           my: 2,
           borderRadius: 5,

@@ -24,6 +24,9 @@ const Templates = () => {
   const [selectedtemplate, setselectedtemplate] = useState<CertificateTemplate>(
     TEMPLATES[0]
   );
+  const [certurl, setcerturl] = useState("");
+  const [certloaded, setcertloaded] = useState(false);
+
   const ref = useRef<HTMLDivElement>(null);
 
   const [information, setinformation] = useState<InformationType>({
@@ -34,23 +37,34 @@ const Templates = () => {
       "This certificate is awarded to [Name] in recognition of their successful completion of [Degree/Academic Program Name] on [Date].",
   });
 
-  const handleDownloadCertificate = useCallback(() => {
+  const handleCreateCertificate = useCallback(() => {
+    setcertloaded(true);
+    console.log("Hi");
+
     if (ref.current === null) {
       return;
     }
 
     toPng(ref.current, { cacheBust: true })
       .then((dataUrl) => {
-        console.log(dataUrl);
-        const link = document.createElement("a");
-        link.download = "my-image-name.png";
-        link.href = dataUrl;
-        link.click();
+        console.log("hello");
+        setcerturl(dataUrl);
+        setcertloaded(false);
       })
       .catch((err) => {
         console.log(err);
+        setcertloaded(false);
       });
   }, [ref]);
+
+  const handleDownloadCertificate = useCallback(() => {
+    if (certurl === "") return;
+
+    const link = document.createElement("a");
+    link.download = "certificate.png";
+    link.href = certurl;
+    link.click();
+  }, [certurl]);
 
   return (
     <>
@@ -58,11 +72,7 @@ const Templates = () => {
         <HeadingandDescComp
           heading="Select a Template to start creating your certificate"
           desc={
-            <>
-              Fill in the text form below with all the details & download.{" "}
-              <br />
-              The certificate will be in PDF format & printable.
-            </>
+            " Fill in the text form below with all the details & download. The certificate will be in PDF format & printable."
           }
           variant={matches ? "h5" : "h4"}
         />
@@ -95,12 +105,27 @@ const Templates = () => {
             <TextFieldsComponent
               information={information}
               setinformation={setinformation}
+              handleCreateCertificate={handleCreateCertificate}
               handleDownloadCertificate={handleDownloadCertificate}
+              certloaded={certloaded}
+              certurl={certurl}
             />
           </Container>
           <Box
             sx={{
-              // transform: "scale(0)",
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+
+            }}
+          >
+            {certurl != "" && (
+              <img className="frontcert" src={certurl} alt="Loading..." />
+            )}
+          </Box>
+          <Box
+            sx={{
+              contentVisibility: "hidden",
             }}
           >
             <CertInformation

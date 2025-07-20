@@ -193,12 +193,12 @@ const SignUp = () => {
 
       <Box
         sx={{
-          width: 500,
           bgcolor: "white",
           my: 2,
           borderRadius: 5,
           border: "0.5px solid rgb(229 231 235)",
           p: 5,
+          maxWidth:500
         }}
       >
         <SingleRegisterInput

@@ -14,7 +14,7 @@ const Footer = () => {
       <Container>
         <Toolbar sx={{ py: 3 }}>
           <Stack
-            direction={{xs:"column",sm:"row"}}
+            direction={{ xs: "column", sm: "row" }}
             spacing={2}
             justifyContent={"space-between"}
             alignItems={"center"}
@@ -29,9 +29,10 @@ const Footer = () => {
               </Typography>
             </Box>
             <Box>
-              {SOCIAL_ICONS.map((Icon) => {
+              {SOCIAL_ICONS.map((Icon, index) => {
                 return (
                   <IconButton
+                    key={index}
                     color="inherit"
                     aria-label="open drawer"
                     sx={{ color: "whitesmoke", mr: 1 }}
