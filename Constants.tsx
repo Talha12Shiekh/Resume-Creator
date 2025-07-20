@@ -51,22 +51,20 @@ export const TEMPLATES = [
 
     positions: {
       hpositions: {
+        top: "45%",
         right: 0,
         left: 0,
-        top: 240,
       },
       detpositions: {
-        right: 0,
-        left: 0,
-        top: 310,
+        top: "60%",
       },
       datepositions: {
-        top: 370,
-        left: 200,
+        bottom: "23%",
+        left: "22%",
       },
       sigpositions: {
-        top: 370,
-        right: 180,
+        bottom: "23%",
+        right: "20%",
       },
     },
   },
@@ -76,22 +74,20 @@ export const TEMPLATES = [
     key: 2,
     positions: {
       hpositions: {
+        top: "43%",
         right: 0,
         left: 0,
-        top: 230,
       },
       detpositions: {
-        right: 0,
-        left: 0,
-        top: 300,
+        top: "58%",
       },
       datepositions: {
-        top: 380,
-        left: 210,
+        left: "23%",
+        bottom: "22%",
       },
       sigpositions: {
-        top: 380,
-        right: 180,
+        right: "21%",
+        bottom: "22%",
       },
     },
   },
@@ -102,22 +98,20 @@ export const TEMPLATES = [
 
     positions: {
       hpositions: {
+        top: "40%",
         right: 0,
         left: 0,
-        top: 200,
       },
       detpositions: {
-        right: 0,
-        left: 0,
-        top: 280,
+        top: "54%",
       },
       datepositions: {
-        top: 390,
-        left: 260,
+        bottom: "20%",
+        left: "31%",
       },
       sigpositions: {
-        top: 390,
-        right: 235,
+        bottom: "20%",
+        right: "28%",
       },
     },
   },
@@ -125,24 +119,22 @@ export const TEMPLATES = [
     img: cert4,
     template: emptycert4,
     key: 4,
-    positions: {
+   positions: {
       hpositions: {
+        top: "38%",
         right: 0,
         left: 0,
-        top: 200,
       },
       detpositions: {
-        right: 0,
-        left: 0,
-        top: 270,
+        top: "53%",
       },
       datepositions: {
-        top: 390,
-        left: 230,
+        bottom: "20%",
+        left: "26%",
       },
       sigpositions: {
-        top: 390,
-        right: 160,
+        bottom: "20%",
+        right: "19%",
       },
     },
   },

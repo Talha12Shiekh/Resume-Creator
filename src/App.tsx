@@ -6,10 +6,18 @@ import { Route, Routes } from "react-router";
 import Templates from "../Screens/Templates";
 import SignUp from "../Screens/SignUp";
 import SignIn from "../Screens/SignIn";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
 
 function App() {
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Navbar />
       <Routes>
@@ -18,7 +26,7 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
 

@@ -1,8 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import type { TextFieldProps } from "@mui/material";
-import { InformationType } from "../Screens/Templates";
+import type { InformationType } from "../Screens/Templates";
 import DownloadIcon from "@mui/icons-material/Download";
+import useResponsiveness from "../Hooks/useResponsiveness";
 
 interface SingleInputProps extends Omit<TextFieldProps, "ref"> {
   label: string;
@@ -60,6 +61,8 @@ const TextFieldsComponent = ({
     }));
   }
 
+  const responsivebtns = useResponsiveness("sm","down")
+
   const { name, date, signature, details } = information;
 
   return (
@@ -95,7 +98,15 @@ const TextFieldsComponent = ({
         multiline
       />
 
-      <Box display={"flex"} sx={{ mt: 4 }} justifyContent={"space-between"}>
+      <Box
+        sx={{
+          mt: 4,
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: responsivebtns ? "column" : "row",
+          gap: 2,
+        }}
+      >
         <Button
           loading={certloaded}
           loadingPosition="start"

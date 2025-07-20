@@ -6,10 +6,10 @@ export interface CertificateTemplate {
   template: string;
   key: number;
   positions: {
-    hpositions: { right: number; left: number; top: number };
-    detpositions: { right: number; left: number; top: number };
-    datepositions: { top: number; left: number };
-    sigpositions: { top: number; right: number };
+    hpositions: { right: number; left: number; top: string };
+    detpositions: { top: string };
+    datepositions: { bottom: string; left: string };
+    sigpositions: { bottom: string; right: string };
   };
 }
 

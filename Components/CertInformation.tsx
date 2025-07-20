@@ -1,6 +1,6 @@
-import { Box, Container, Typography } from "@mui/material";
-import { CertificateTemplate } from "./SingleCertificate";
-import { InformationType } from "../Screens/Templates";
+import { Box, Typography } from "@mui/material";
+import type { CertificateTemplate } from "./SingleCertificate";
+import type { InformationType } from "../Screens/Templates";
 
 const CertInformation = ({
   selectedtemplate,
@@ -25,9 +25,9 @@ const CertInformation = ({
         sx={{
           position: "relative",
           width: "70%",
-          height: 500,
+          // width: "100%",
+          // height: 500,
           my: 2,
-          bgcolor: "red",
         }}
         ref={ref}
       >
@@ -44,12 +44,13 @@ const CertInformation = ({
           }}
         >
           <Typography
-            variant="h2"
+            fontSize="clamp(20px, 5vw, 60px)"
             className="cursive"
             textAlign={"center"}
             style={{
               position: "absolute",
-              ...hpositions,
+              ...hpositions
+              
             }}
           >
             {name}
@@ -57,6 +58,7 @@ const CertInformation = ({
           <Typography
             variant="caption"
             className="poppins"
+            fontSize="clamp(5px, 1vw, 15px)"
             textAlign={"center"}
             style={{
               position: "absolute",
@@ -69,9 +71,8 @@ const CertInformation = ({
             <Box sx={{ width: "70%" }}>{details}</Box>
           </Typography>
           <Typography
-            variant="body1"
             className="dmserif"
-            textAlign={"center"}
+            fontSize="clamp(6px,1.3vw,20px)"
             style={{
               position: "absolute",
               ...datepositions,
@@ -80,9 +81,8 @@ const CertInformation = ({
             {date}
           </Typography>
           <Typography
-            variant="body1"
+            fontSize="clamp(4px,1.3vw,15px)"
             className="dmserif"
-            textAlign={"center"}
             style={{
               position: "absolute",
               ...sigpositions,

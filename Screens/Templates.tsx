@@ -1,10 +1,9 @@
-import { Container, Grid, Box, Typography } from "@mui/material";
+import { Container, Grid, Box } from "@mui/material";
 import HeadingandDescComp from "../Components/HeadingandDescComp";
 import useResponsiveness from "../Hooks/useResponsiveness";
 import { TEMPLATES } from "../Constants";
-import SingleCertificate, {
-  CertificateTemplate,
-} from "../Components/SingleCertificate";
+import SingleCertificate from "../Components/SingleCertificate";
+import type { CertificateTemplate } from "../Components/SingleCertificate";
 import TextFieldsComponent from "../Components/TextFieldsComponent";
 import Footer from "../Components/Footer";
 import { useCallback, useRef, useState } from "react";
@@ -39,7 +38,6 @@ const Templates = () => {
 
   const handleCreateCertificate = useCallback(() => {
     setcertloaded(true);
-    console.log("Hi");
 
     if (ref.current === null) {
       return;
@@ -47,7 +45,6 @@ const Templates = () => {
 
     toPng(ref.current, { cacheBust: true })
       .then((dataUrl) => {
-        console.log("hello");
         setcerturl(dataUrl);
         setcertloaded(false);
       })
@@ -100,7 +97,6 @@ const Templates = () => {
             ))}
           </Grid>
 
-          {/* Text fields component section ( where user can enter information for the certificate ) */}
           <Container component="section">
             <TextFieldsComponent
               information={information}
@@ -115,12 +111,15 @@ const Templates = () => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              width: "100%",
-
+              my: 5,
             }}
           >
             {certurl != "" && (
-              <img className="frontcert" src={certurl} alt="Loading..." />
+              <img
+                style={{ width: matches ? "90%" : "70%" }}
+                src={certurl}
+                alt="Loading..."
+              />
             )}
           </Box>
           <Box
@@ -137,7 +136,6 @@ const Templates = () => {
         </Box>
       </Container>
       <Footer />
-      {/* Footer section */}
     </>
   );
 };
