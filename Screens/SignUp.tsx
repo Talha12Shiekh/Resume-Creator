@@ -176,6 +176,33 @@ const SignUp = () => {
     }));
   }
 
+  async function handleSignUp() {
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const res = await response.json();
+      if (res.success) {
+        // ------------------------------------------
+        // Display that user created successfully
+        // ------------------------------------------
+        localStorage.setItem("token", res.token);
+        navigate("/templates");
+      } else {
+        // ------------------------------------------
+        // Error message display
+        // ------------------------------------------
+        console.log(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -198,7 +225,7 @@ const SignUp = () => {
           borderRadius: 5,
           border: "0.5px solid rgb(229 231 235)",
           p: 5,
-          maxWidth:500
+          maxWidth: 500,
         }}
       >
         <SingleRegisterInput
@@ -222,7 +249,12 @@ const SignUp = () => {
           value={password}
           onChange={handlChangeCredentials}
         />
-        <Button fullWidth onClick={() => {}} sx={{ my: 1 }} variant="contained">
+        <Button
+          fullWidth
+          onClick={handleSignUp}
+          sx={{ my: 1 }}
+          variant="contained"
+        >
           <Typography textTransform="capitalize" className="poppins">
             Sign up
           </Typography>

@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,7 +14,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { navItems } from "../Constants";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useNavigate } from "react-router";
+import { useNavigate,useLocation } from "react-router";
+import { useEffect, useState } from "react";
 
 function Logo() {
   const navigate = useNavigate();
@@ -35,8 +35,20 @@ function Logo() {
 }
 
 function Navbar() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-   const navigate = useNavigate();
+  const location = useLocation();
+  const [userexists, setuserexists] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setuserexists(true);
+    } else {
+      setuserexists(false);
+    }
+  }, [location.pathname]);
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -67,6 +79,14 @@ function Navbar() {
       </List>
     </Box>
   );
+
+  function handleNavigation(){
+    if(userexists){
+
+    }else {
+      navigate("/signup")
+    }
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -108,9 +128,9 @@ function Navbar() {
             </Box>
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button variant="contained" onClick={() => navigate("/signup")}>
+            <Button variant="contained" onClick={handleNavigation}>
               <Typography className="poppins" textTransform="capitalize">
-                Sign up
+                {userexists ? "Dashboard" : "Sign up"}
               </Typography>
             </Button>
           </Box>

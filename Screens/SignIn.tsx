@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import { BottomText, PasswordInput, SingleRegisterInput } from "./SignUp";
+import { useNavigate } from "react-router";
 
 interface CredentialsType {
   email: string;
@@ -9,6 +10,7 @@ interface CredentialsType {
 }
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [showpassword, setShowPassword] = useState(false);
 
   const [credentials, setcredentials] = useState<CredentialsType>({
@@ -25,6 +27,34 @@ const SignIn = () => {
       ...p,
       [e.target.name]: e.target.value,
     }));
+  }
+
+  async function handleSignIn(){
+
+     try {
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({email, password }),
+      });
+      const res = await response.json();
+      if (res.success) {
+        // ------------------------------------------
+        // Display that user created successfully
+        // ------------------------------------------
+        localStorage.setItem("token", res.token);
+        navigate("/templates");
+      } else {
+        // ------------------------------------------
+        // Error message display
+        // ------------------------------------------
+        console.log(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -66,7 +96,7 @@ const SignIn = () => {
           value={password}
           onChange={handlChangeCredentials}
         />
-        <Button fullWidth onClick={() => {}} sx={{ my: 1 }} variant="contained">
+        <Button fullWidth onClick={handleSignIn} sx={{ my: 1 }} variant="contained">
           <Typography textTransform="capitalize" className="poppins">
             Sign In
           </Typography>

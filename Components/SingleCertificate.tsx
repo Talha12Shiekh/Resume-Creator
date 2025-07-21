@@ -47,7 +47,7 @@ const SingleCertificate = ({
         sx={{
           width: 200,
           height: 150,
-          bgcolor: "red",
+          bgcolor: "grey",
           m: 2,
           boxShadow: "2px 2px 10px 2px grey",
           cursor: "pointer",

@@ -4,17 +4,25 @@ import HeadingAndDescComp from "../Components/HeadingandDescComp";
 import { useNavigate } from "react-router";
 
 const Home = () => {
+  let navigate = useNavigate();
 
-     let navigate = useNavigate();
+  function handleNavigatetotemplates() {
+    const usertoken = localStorage.getItem("token");
+    if (usertoken) {
+      navigate("/templates");
+    } else {
+      navigate("/signup");
+    }
+  }
 
   return (
     <Container
-        component="main"
-        sx={{
+      component="main"
+      sx={{
         display: "flex",
         justifyContent: "center",
-        alignItems:"center",
-        height:"100vh",
+        alignItems: "center",
+        height: "100vh",
         pt: 15,
         flexDirection: "column",
       }}
@@ -31,7 +39,11 @@ const Home = () => {
         variant="h2"
       />
       <Box sx={{ display: "flex", justifyContent: "center", py: 5 }}>
-        <Button onClick={() => navigate("/templates")} variant="contained" sx={{ px: 4, py: 2 }}>
+        <Button
+          onClick={handleNavigatetotemplates}
+          variant="contained"
+          sx={{ px: 4, py: 2 }}
+        >
           <Typography
             textTransform="capitalize"
             className="poppins"

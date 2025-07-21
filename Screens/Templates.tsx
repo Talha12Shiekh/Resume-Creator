@@ -6,9 +6,10 @@ import SingleCertificate from "../Components/SingleCertificate";
 import type { CertificateTemplate } from "../Components/SingleCertificate";
 import TextFieldsComponent from "../Components/TextFieldsComponent";
 import Footer from "../Components/Footer";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import CertInformation from "../Components/CertInformation";
 import { toPng } from "html-to-image";
+import { useNavigate } from "react-router";
 
 export interface InformationType {
   name: string;
@@ -18,6 +19,7 @@ export interface InformationType {
 }
 
 const Templates = () => {
+  const navigate = useNavigate();
   const matches = useResponsiveness("sm", "down");
   const [activeindex, setactiveindex] = useState(0);
   const [selectedtemplate, setselectedtemplate] = useState<CertificateTemplate>(
@@ -62,6 +64,15 @@ const Templates = () => {
     link.href = certurl;
     link.click();
   }, [certurl]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      // allow creation of certificates
+    } else {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>
