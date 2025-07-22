@@ -25,7 +25,8 @@ const certificateSchema = new Schema({
         minLength: [75, "Too short description."],
         maxLength: [150, "Too long description."],
         required: [true, "Description is required."]
-    }
+    },
+    url: { type:String, required: true }
 });
 
-exports.Certificate = mongoose.model("Certificates",certificateSchema);
+exports.Certificate = mongoose.model("Certificates", certificateSchema);

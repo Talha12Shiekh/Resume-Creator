@@ -4,7 +4,7 @@ const authMiddlewear = (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
-        res.status(401).json({ message: "Access denied" });
+        return res.status(401).json({ message: "Access denied" });
     }
 
     try {
@@ -14,7 +14,8 @@ const authMiddlewear = (req, res, next) => {
         }
         next();
     } catch (error) {
-        res.status(403).json({ message: "Invalid Token" });
+        console.log(error.message);
+        return res.status(403).json({ message: "Invalid Token" });
     }
 }
 

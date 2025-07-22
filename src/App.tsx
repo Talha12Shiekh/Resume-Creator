@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router";
 import Templates from "../Screens/Templates";
 import SignUp from "../Screens/SignUp";
 import SignIn from "../Screens/SignIn";
+import Dashboard from "../Screens/Dashboard";
 import {
   createTheme,
   responsiveFontSizes,
@@ -25,6 +26,7 @@ function App() {
         <Route path="templates" element={<Templates />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
+        <Route path="dashboard" element={<Dashboard />} />
       </Routes>
     </ThemeProvider>
   );

@@ -38,22 +38,47 @@ const Templates = () => {
       "This certificate is awarded to [Name] in recognition of their successful completion of [Degree/Academic Program Name] on [Date].",
   });
 
-  const handleCreateCertificate = useCallback(() => {
+  const { name, date, signature, details } = information;
+
+  const handleCreateCertificate = useCallback(async () => {
     setcertloaded(true);
 
     if (ref.current === null) {
       return;
     }
 
-    toPng(ref.current, { cacheBust: true })
-      .then((dataUrl) => {
-        setcerturl(dataUrl);
-        setcertloaded(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setcertloaded(false);
-      });
+    try {
+      const dataUrl = await toPng(ref.current, { cacheBust: true });
+      setcerturl(dataUrl);
+      setcertloaded(false);
+
+      const response = await fetch(
+        "http://localhost:3000/api/certificates/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            name,
+            date,
+            signature,
+            details,
+            url: dataUrl,
+          }),
+        }
+      );
+      const res = await response.json();
+      if (res.success) {
+        console.log(res.message);
+      } else {
+        console.log(res.message);
+      }
+    } catch (err) {
+      console.log(err.message);
+      setcertloaded(false);
+    }
   }, [ref]);
 
   const handleDownloadCertificate = useCallback(() => {

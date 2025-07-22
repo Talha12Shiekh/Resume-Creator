@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { navItems } from "../Constants";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useNavigate,useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 
 function Logo() {
@@ -80,11 +80,11 @@ function Navbar() {
     </Box>
   );
 
-  function handleNavigation(){
-    if(userexists){
-
-    }else {
-      navigate("/signup")
+  function handleNavigation() {
+    if (userexists) {
+      navigate("/dashboard");
+    } else {
+      navigate("/signup");
     }
   }
 
