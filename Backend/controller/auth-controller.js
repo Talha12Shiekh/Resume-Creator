@@ -10,15 +10,16 @@ exports.signup = async (req, res) => {
         const userExists = await User.findOne({ email });
         if (userExists) return res.status(400).json({ success: false, message: "User already exists" });
 
+        let token = null;
         const newUser = new User({ name, email, password });
         if (password && password.trim() != "") {
             const hashedPassword = await bcrypt.hash(password, 10);
             newUser.password = hashedPassword;
-            const token = jwt.sign({
+            token = jwt.sign({
                 id: newUser._id
             }, process.env.JWT_SECRET, { expiresIn: '1h' });
             newUser.token = token;
-        } 
+        }
         await newUser.save();
 
         return res.status(201).json({ token, message: "User created successfully! ", success: true });

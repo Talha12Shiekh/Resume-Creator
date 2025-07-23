@@ -50,8 +50,7 @@ const Templates = () => {
 
     try {
       const dataUrl = await toPng(ref.current, { cacheBust: true });
-      setcerturl(dataUrl);
-      setcertloaded(false);
+     
 
       const response = await fetch(
         "http://localhost:3000/api/certificates/create",
@@ -72,8 +71,12 @@ const Templates = () => {
       );
       const res = await response.json();
       if (res.success) {
+        setcerturl(dataUrl);
+        setcertloaded(false);
         showsuccesstoast(res.message);
       } else {
+        setcerturl("");
+        setcertloaded(false);
         const errmsgs = res.messages;
         console.log(errmsgs);
         if (errmsgs) {
@@ -86,7 +89,7 @@ const Templates = () => {
       console.log(err);
       setcertloaded(false);
     }
-  }, [ref]);
+  }, [ref, name, date, signature, details]);
 
   const handleDownloadCertificate = useCallback(() => {
     if (certurl === "") return;
@@ -99,16 +102,13 @@ const Templates = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      // allow creation of certificates
-    } else {
+    if (!token) {
       navigate("/");
-    }
+    } 
   }, []);
 
   return (
     <>
-      {/* <ToastContainer toastStyle={{ fontFamily: "poppins" }} /> */}
       <Container component="main" sx={{ pt: 15 }}>
         <HeadingandDescComp
           heading="Select a Template to start creating your certificate"
@@ -118,7 +118,6 @@ const Templates = () => {
           variant={matches ? "h5" : "h4"}
         />
 
-        {/* Templates section from which the user can choose the template of certificate */}
         <Box
           sx={{
             py: 3,

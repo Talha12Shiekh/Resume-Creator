@@ -52,6 +52,7 @@ const TextFieldsComponent = ({
   handleDownloadCertificate,
   certurl,
 }: TextFieldsComponentProps) => {
+
   function handlChangeInformation(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {

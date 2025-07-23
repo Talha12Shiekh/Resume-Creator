@@ -23,7 +23,7 @@ const certificateSchema = new Schema({
     details: {
         type: String,
         minLength: [75, "Too short description."],
-        maxLength: [150, "Too long description."],
+        maxLength: [200, "Too long description."],
         required: [true, "Description is required."]
     },
     url: { type: String, required: true }

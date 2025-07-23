@@ -3,6 +3,9 @@ const { Certificate } = require("../models/certificate-model");
 exports.createCertificate = async (req, res) => {
     const { name, date, signature, details, url } = req.body;
 
+    console.log("----------------------------");
+    console.log(name, date, signature, details);
+    console.log("----------------------------");
 
     try {
         const certificate = new Certificate({
