@@ -1,5 +1,4 @@
 import { Container, Typography, Button, Box } from "@mui/material";
-// import FrontCertificateImg from "/Front-certificate.png";
 import HeadingAndDescComp from "../Components/HeadingandDescComp";
 import { useNavigate } from "react-router";
 

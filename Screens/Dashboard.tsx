@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import CertCard from "../Components/CertificateCard";
 
@@ -40,23 +40,29 @@ const Dashboard = () => {
           py: 15,
         }}
       >
-        <Grid container spacing={5}>
-          {usercertificates.map(({ url, _id }) => {
-            return (
-              <Grid
-                key={_id}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                size={{ xs: 12, sm: 6, lg: 4, xl: 3 }}
-              >
-                <CertCard url={url} />
-              </Grid>
-            );
-          })}
-        </Grid>
+        {usercertificates.length > 0 ? (
+          <Grid container spacing={5}>
+            {usercertificates.map(({ url, _id }) => {
+              return (
+                <Grid
+                  key={_id}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  size={{ xs: 12, sm: 6, lg: 4, xl: 3 }}
+                >
+                  <CertCard url={url} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        ) : (
+          <Typography className="poppins" variant="h4" textAlign={"center"}>
+            No certificates found.
+          </Typography>
+        )}
       </Box>
     </>
   );

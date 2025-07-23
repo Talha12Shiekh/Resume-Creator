@@ -16,12 +16,15 @@ exports.createCertificate = async (req, res) => {
 
         await certificate.save();
 
-        console.log("Certificate created successfully!");
-
-        res.status(201).json({ success: true, message: "Certificate created successfully!" })
+        return res.status(201).json({ success: true, message: "Certificate created successfully!" })
     } catch (err) {
-        console.log(err.message);
-        res.status(500).json({ success: false, message: "Internal Server Error!" })
+        if (err.name === 'ValidationError') {
+            const messages = Object.values(err.errors).map(val => val.message);
+            console.log(messages);
+            return res.status(400).json({ success: false, messages });
+        }
+
+        return res.status(500).json({ success: false, message: "Internal Server Error!" });
     }
 }
 
@@ -29,10 +32,14 @@ exports.getcertificate = async (req, res) => {
     try {
 
         const certificates = await Certificate.find({ createdBy: req.veruserid }, "url");
-        res.status(201).json({ success: true, data: certificates })
+        return res.status(201).json({ success: true, data: certificates })
 
     } catch (err) {
-        console.log(err.message);
-        res.status(500).json({ success: false, message: "Internal Server Error!" })
+        if (err.name === 'ValidationError') {
+            const messages = Object.values(err.errors).map(val => val.message);
+            return res.status(400).json({ success: false, messages });
+        }
+
+        return res.status(500).json({ success: false, message: "Internal Server Error!" });
     }
 }

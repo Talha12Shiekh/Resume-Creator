@@ -8,7 +8,7 @@ const certificateSchema = new Schema({
         maxLength: [20, "Name cannot exceed 20 characters."],
         required: [true, "Name is required."],
     },
-    date: String,
+    date: { type: String, required: [true, "Date is required! "] },
     signature: {
         type: String,
         minLength: [5, "Signature must be at least 5 characters long."],
@@ -26,7 +26,7 @@ const certificateSchema = new Schema({
         maxLength: [150, "Too long description."],
         required: [true, "Description is required."]
     },
-    url: { type:String, required: true }
+    url: { type: String, required: true }
 });
 
 exports.Certificate = mongoose.model("Certificates", certificateSchema);

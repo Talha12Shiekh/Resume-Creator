@@ -81,6 +81,12 @@ function Navbar() {
   );
 
   function handleNavigation() {
+    if (location.pathname == "/dashboard") {
+      localStorage.removeItem("token");
+      navigate("/");
+      return;
+    }
+
     if (userexists) {
       navigate("/dashboard");
     } else {
@@ -130,7 +136,11 @@ function Navbar() {
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Button variant="contained" onClick={handleNavigation}>
               <Typography className="poppins" textTransform="capitalize">
-                {userexists ? "Dashboard" : "Sign up"}
+                {location.pathname == "/dashboard"
+                  ? "Logout"
+                  : userexists
+                  ? "Dashboard"
+                  : "Sign up"}
               </Typography>
             </Button>
           </Box>

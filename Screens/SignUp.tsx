@@ -14,6 +14,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import KeyIcon from "@mui/icons-material/Key";
 import { useNavigate } from "react-router";
+import { Bounce, toast } from "react-toastify";
 
 interface SingleRegisterInputProps extends Omit<TextFieldProps, "ref"> {
   placeholder: string;
@@ -154,6 +155,30 @@ interface CredentialsType {
   password: string;
 }
 
+export function showsuccesstoast(msg: string) {
+  toast.success(msg, {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    pauseOnHover: false,
+    progress: undefined,
+    theme: "colored",
+    transition: Bounce,
+  });
+}
+
+export function showerrtoast(msg: string) {
+  toast.error(msg, {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    pauseOnHover: false,
+    progress: undefined,
+    theme: "colored",
+    transition: Bounce,
+  });
+}
+
 const SignUp = () => {
   const navigate = useNavigate();
 
@@ -187,21 +212,22 @@ const SignUp = () => {
       });
       const res = await response.json();
       if (res.success) {
-        // ------------------------------------------
-        // Display that user created successfully
-        // ------------------------------------------
         localStorage.setItem("token", res.token);
+        showsuccesstoast("Account created successfully !");
         navigate("/templates");
       } else {
-        // ------------------------------------------
-        // Error message display
-        // ------------------------------------------
-        console.log(res.message);
+        const errmsgs = res.messages;
+        if(errmsgs){
+          errmsgs.forEach(msg => showerrtoast(msg));
+        }else {
+          showerrtoast(res.message);
+        }
       }
     } catch (error) {
       console.log(error);
     }
   }
+
 
   return (
     <Box
@@ -214,6 +240,7 @@ const SignUp = () => {
         alignItems: "center",
       }}
     >
+      {/* <ToastContainer toastStyle={{ fontFamily: "poppins" }} /> */}
       <Typography className="poppins" fontWeight={"bold"} variant="h6">
         Sign up to use _TKCertFactory
       </Typography>

@@ -1,8 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
-import { BottomText, PasswordInput, SingleRegisterInput } from "./SignUp";
+import {
+  BottomText,
+  PasswordInput,
+  showerrtoast,
+  showsuccesstoast,
+  SingleRegisterInput,
+} from "./SignUp";
 import { useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
 
 interface CredentialsType {
   email: string;
@@ -29,28 +36,27 @@ const SignIn = () => {
     }));
   }
 
-  async function handleSignIn(){
-
-     try {
+  async function handleSignIn() {
+    try {
       const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({email, password }),
+        body: JSON.stringify({ email, password }),
       });
       const res = await response.json();
       if (res.success) {
-        // ------------------------------------------
-        // Display that user created successfully
-        // ------------------------------------------
         localStorage.setItem("token", res.token);
+        showsuccesstoast("User logged in successfully !");
         navigate("/templates");
       } else {
-        // ------------------------------------------
-        // Error message display
-        // ------------------------------------------
-        console.log(res.message);
+        const errmsgs = res.messages;
+        if (errmsgs) {
+          errmsgs.forEach((msg) => showerrtoast(msg));
+        } else {
+          showerrtoast(res.message);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -68,6 +74,7 @@ const SignIn = () => {
         alignItems: "center",
       }}
     >
+      {/* <ToastContainer toastStyle={{ fontFamily: "poppins" }} /> */}
       <Typography className="poppins" fontWeight={"bold"} variant="h6">
         Sign in
       </Typography>
@@ -96,7 +103,12 @@ const SignIn = () => {
           value={password}
           onChange={handlChangeCredentials}
         />
-        <Button fullWidth onClick={handleSignIn} sx={{ my: 1 }} variant="contained">
+        <Button
+          fullWidth
+          onClick={handleSignIn}
+          sx={{ my: 1 }}
+          variant="contained"
+        >
           <Typography textTransform="capitalize" className="poppins">
             Sign In
           </Typography>

@@ -10,6 +10,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import CertInformation from "../Components/CertInformation";
 import { toPng } from "html-to-image";
 import { useNavigate } from "react-router";
+import { showerrtoast, showsuccesstoast } from "./SignUp";
 
 export interface InformationType {
   name: string;
@@ -71,12 +72,18 @@ const Templates = () => {
       );
       const res = await response.json();
       if (res.success) {
-        console.log(res.message);
+        showsuccesstoast(res.message);
       } else {
-        console.log(res.message);
+        const errmsgs = res.messages;
+        console.log(errmsgs);
+        if (errmsgs) {
+          errmsgs.forEach((msg) => showerrtoast(msg));
+        } else {
+          showerrtoast(res.message);
+        }
       }
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
       setcertloaded(false);
     }
   }, [ref]);
@@ -101,6 +108,7 @@ const Templates = () => {
 
   return (
     <>
+      {/* <ToastContainer toastStyle={{ fontFamily: "poppins" }} /> */}
       <Container component="main" sx={{ pt: 15 }}>
         <HeadingandDescComp
           heading="Select a Template to start creating your certificate"

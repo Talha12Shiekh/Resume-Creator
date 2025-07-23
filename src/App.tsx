@@ -7,11 +7,13 @@ import Templates from "../Screens/Templates";
 import SignUp from "../Screens/SignUp";
 import SignIn from "../Screens/SignIn";
 import Dashboard from "../Screens/Dashboard";
+import 'react-toastify/dist/ReactToastify.css';
 import {
   createTheme,
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   let theme = createTheme();
@@ -19,6 +21,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer toastStyle={{ fontFamily: "poppins" }} />
       <CssBaseline />
       <Navbar />
       <Routes>

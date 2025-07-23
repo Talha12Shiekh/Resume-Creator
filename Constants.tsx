@@ -20,6 +20,8 @@ export const navItems = [
   "Pricing",
 ];
 
+export const TOAST_BG = "#44cc11"
+
 export const TEXTS_DATA = [
   {
     heading: "Pick your free template",
