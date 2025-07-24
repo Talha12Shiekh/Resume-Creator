@@ -2,12 +2,36 @@ import { Card, CardMedia, Box } from "@mui/material";
 import CardActionArea from "@mui/material/CardActionArea";
 import CertificateViewModel from "./CertificateViewModel";
 import { useState } from "react";
+import CertMenu from "./CertMenu";
+import type { UserCertificateType } from "../Screens/Dashboard";
 
-export default function CertificateCard({ url }: { url: string }) {
-  const [showcert,setshowcert] = useState(false);
+interface CertificateCardProps {
+  url: string;
+  id: string;
+  usercertificates: UserCertificateType[];
+  setusercertificates: React.Dispatch<
+    React.SetStateAction<UserCertificateType[]>
+  >;
+}
 
-  function toggleOpen(){
-    setshowcert(p => !p);
+export default function CertificateCard({
+  url,
+  id,
+  usercertificates,
+  setusercertificates,
+}: CertificateCardProps) {
+  const [showcert, setshowcert] = useState(false);
+
+  function toggleOpen() {
+    setshowcert((p) => !p);
+  }
+
+  function dltcertificate(dltid: string) {
+    let copyofcerts = [...usercertificates];
+    const dcertificates = copyofcerts.filter((c) => c._id != dltid);
+    if (dcertificates.length > 0) {
+      setusercertificates(dcertificates);
+    }
   }
 
   return (
@@ -25,15 +49,18 @@ export default function CertificateCard({ url }: { url: string }) {
           border: "1px solid rgb(229 231 235)",
         }}
       >
-        <CardActionArea onClick={toggleOpen}>
-          <Box sx={{ p: 2 }}>
-            <CardMedia
-              component="img"
-              image={url}
-              alt="Certificate Loading..."
-            />
-          </Box>
-        </CardActionArea>
+        <Box sx={{ position: "relative" }}>
+          <CertMenu url={url} id={id} dltcertificate={dltcertificate} />
+          <CardActionArea onClick={toggleOpen}>
+            <Box sx={{ p: 2 }}>
+              <CardMedia
+                component="img"
+                image={url}
+                alt="Certificate Loading..."
+              />
+            </Box>
+          </CardActionArea>
+        </Box>
       </Card>
     </>
   );

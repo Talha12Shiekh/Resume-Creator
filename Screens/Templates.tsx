@@ -19,6 +19,15 @@ export interface InformationType {
   details: string;
 }
 
+export const downloadCertificate = (certurl: string) => {
+  if (certurl === "") return;
+
+  const link = document.createElement("a");
+  link.download = "certificate.png";
+  link.href = certurl;
+  link.click();
+};
+
 const Templates = () => {
   const navigate = useNavigate();
   const matches = useResponsiveness("sm", "down");
@@ -50,7 +59,6 @@ const Templates = () => {
 
     try {
       const dataUrl = await toPng(ref.current, { cacheBust: true });
-     
 
       const response = await fetch(
         "http://localhost:3000/api/certificates/create",
@@ -80,7 +88,7 @@ const Templates = () => {
         const errmsgs = res.messages;
         console.log(errmsgs);
         if (errmsgs) {
-          errmsgs.forEach((msg) => showerrtoast(msg));
+          errmsgs.forEach((msg: string) => showerrtoast(msg));
         } else {
           showerrtoast(res.message);
         }
@@ -91,20 +99,16 @@ const Templates = () => {
     }
   }, [ref, name, date, signature, details]);
 
-  const handleDownloadCertificate = useCallback(() => {
-    if (certurl === "") return;
-
-    const link = document.createElement("a");
-    link.download = "certificate.png";
-    link.href = certurl;
-    link.click();
-  }, [certurl]);
+  const handleDownloadCertificate = useCallback(
+    () => downloadCertificate(certurl),
+    [certurl]
+  );
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/");
-    } 
+    }
   }, []);
 
   return (

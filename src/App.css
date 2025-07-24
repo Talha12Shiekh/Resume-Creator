@@ -26,3 +26,7 @@ input#input-with-icon-textfield {
   padding: .5em !important;
   font-family: "Poppins", sans-serif !important;
 }
+
+.menubtn:hover{
+  border:1.5px solid blue;
+}

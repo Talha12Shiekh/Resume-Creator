@@ -54,6 +54,32 @@ function Navbar() {
     setMobileOpen((prevState) => !prevState);
   };
 
+  function handleNavigation() {
+    if (location.pathname == "/dashboard") {
+      localStorage.removeItem("token");
+      navigate("/");
+      return;
+    }
+
+    if (userexists) {
+      navigate("/dashboard");
+    } else {
+      navigate("/signup");
+    }
+  }
+
+  const TopButton = () => (
+    <Button variant="contained" onClick={handleNavigation}>
+      <Typography className="poppins" textTransform="capitalize">
+        {location.pathname == "/dashboard"
+          ? "Logout"
+          : userexists
+          ? "Dashboard"
+          : "Sign up"}
+      </Typography>
+    </Button>
+  );
+
   const drawer = (
     <Box onClick={handleDrawerToggle}>
       <Box
@@ -77,22 +103,11 @@ function Navbar() {
           </ListItem>
         ))}
       </List>
+      <Box sx={{ pl: 2 }}>
+        <TopButton />
+      </Box>
     </Box>
   );
-
-  function handleNavigation() {
-    if (location.pathname == "/dashboard") {
-      localStorage.removeItem("token");
-      navigate("/");
-      return;
-    }
-
-    if (userexists) {
-      navigate("/dashboard");
-    } else {
-      navigate("/signup");
-    }
-  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -134,15 +149,7 @@ function Navbar() {
             </Box>
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button variant="contained" onClick={handleNavigation}>
-              <Typography className="poppins" textTransform="capitalize">
-                {location.pathname == "/dashboard"
-                  ? "Logout"
-                  : userexists
-                  ? "Dashboard"
-                  : "Sign up"}
-              </Typography>
-            </Button>
+            <TopButton />
           </Box>
         </Toolbar>
       </AppBar>

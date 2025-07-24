@@ -66,7 +66,7 @@ export const TEMPLATES = [
       },
       sigpositions: {
         bottom: "23%",
-        right: "20%",
+        right: "21%",
       },
     },
   },
@@ -88,7 +88,7 @@ export const TEMPLATES = [
         bottom: "22%",
       },
       sigpositions: {
-        right: "21%",
+        right: "25%",
         bottom: "22%",
       },
     },
@@ -113,7 +113,7 @@ export const TEMPLATES = [
       },
       sigpositions: {
         bottom: "20%",
-        right: "28%",
+        right: "30%",
       },
     },
   },

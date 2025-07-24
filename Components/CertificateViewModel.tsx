@@ -17,6 +17,7 @@ const CertificateViewModel = ({
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{zIndex:999999}}
       >
         <Box
           p={5}

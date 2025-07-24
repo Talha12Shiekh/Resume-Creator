@@ -93,7 +93,7 @@ export const SingleRegisterInput = ({
 }: SingleRegisterInputProps) => {
   return (
     <TextField
-      id="input-with-icon-textfield"
+      id={"input-with-icon-textfield"}
       slotProps={{
         input: {
           startAdornment: (
@@ -217,9 +217,9 @@ const SignUp = () => {
         navigate("/templates");
       } else {
         const errmsgs = res.messages;
-        if(errmsgs){
-          errmsgs.forEach(msg => showerrtoast(msg));
-        }else {
+        if (errmsgs) {
+          errmsgs.forEach((msg: string) => showerrtoast(msg));
+        } else {
           showerrtoast(res.message);
         }
       }
@@ -227,7 +227,6 @@ const SignUp = () => {
       console.log(error);
     }
   }
-
 
   return (
     <Box

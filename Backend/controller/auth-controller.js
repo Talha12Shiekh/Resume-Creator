@@ -17,7 +17,7 @@ exports.signup = async (req, res) => {
             newUser.password = hashedPassword;
             token = jwt.sign({
                 id: newUser._id
-            }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            }, process.env.JWT_SECRET);
             newUser.token = token;
         }
         await newUser.save();
