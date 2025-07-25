@@ -22,12 +22,11 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use("/api/auth", authRoutes);
 app.use("/api/certificates", authMiddlewear, certRoutes);
 
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.resolve(__dirname, "dist")));
 
 app.get("/*splat", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
