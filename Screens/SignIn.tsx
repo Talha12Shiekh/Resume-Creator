@@ -9,7 +9,6 @@ import {
   SingleRegisterInput,
 } from "./SignUp";
 import { useNavigate } from "react-router";
-import { ToastContainer } from "react-toastify";
 
 interface CredentialsType {
   email: string;
@@ -38,7 +37,7 @@ const SignIn = () => {
 
   async function handleSignIn() {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +52,7 @@ const SignIn = () => {
       } else {
         const errmsgs = res.messages;
         if (errmsgs) {
-          errmsgs.forEach((msg) => showerrtoast(msg));
+          errmsgs.forEach((msg:string) => showerrtoast(msg));
         } else {
           showerrtoast(res.message);
         }

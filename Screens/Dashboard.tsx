@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   async function fetchUserCertificates() {
     const response = await fetch(
-      `http://localhost:3000/api/certificates/getcertificates`,
+      `/api/certificates/getcertificates`,
       {
         method: "GET",
         headers: {

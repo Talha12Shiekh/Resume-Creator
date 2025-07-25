@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
+const CONNECTION_STRING = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@tkcertfactory.t0tied7.mongodb.net/`
+
 async function main() {
-    await mongoose.connect('mongodb://localhost:27017/CertificateGenerator');
+    await mongoose.connect(CONNECTION_STRING);
     console.log("Database connected successfully!")
 }
 

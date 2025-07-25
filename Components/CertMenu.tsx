@@ -37,7 +37,7 @@ export default function CertMenu({ url, id, dltcertificate }: CertMenuProps) {
   async function handleDeleteCertificate() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/certificates/deletecertificate/${id}`,
+        `/api/certificates/deletecertificate/${id}`,
         {
           method: "DELETE",
           headers: {

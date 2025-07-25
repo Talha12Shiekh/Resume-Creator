@@ -61,7 +61,7 @@ const Templates = () => {
       const dataUrl = await toPng(ref.current, { cacheBust: true });
 
       const response = await fetch(
-        "http://localhost:3000/api/certificates/create",
+        "/api/certificates/create",
         {
           method: "POST",
           headers: {
